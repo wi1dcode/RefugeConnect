@@ -3,18 +3,26 @@
 @section('title', 'Accueil')
 
 @section('content')
-    <h1>Nos animaux</h1>
+    <section class="home-section">
+        <div class="container">
+            <h1 class="page-title">Nos animaux</h1>
 
-    @forelse ($animals as $animal)
-        <x-animal-card
-            :id="$animal->id"
-            :name="$animal->name"
-            :species="$animal->species"
-            :age="$animal->age"
-            :description="$animal->description"
-            :photo="$animal->photo"
-        />
-    @empty
-        <p>Aucun animal trouvé.</p>
-    @endforelse
+            @if ($animals->isEmpty())
+                <p class="empty-message">Aucun animal trouvé.</p>
+            @else
+                <div class="animals-grid">
+                    @foreach ($animals as $animal)
+                        <x-animal-card
+                            :id="$animal->id"
+                            :name="$animal->name"
+                            :species="$animal->species"
+                            :age="$animal->age"
+                            :description="$animal->description"
+                            :photo="$animal->photo"
+                        />
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    </section>
 @endsection
